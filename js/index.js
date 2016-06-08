@@ -44,7 +44,7 @@ window.addEventListener('load', function(){
   console = new Console('console', console);
 	var videoOutput = document.getElementById('videoOutput');
 	var address = document.getElementById('address');
-	address.value = 'http://files.kurento.org/video/puerta-del-sol.ts';
+	address.value = 'http://192.168.1.127:8080/test.mp4';
   var pipeline;
   var webRtcPeer;
 
