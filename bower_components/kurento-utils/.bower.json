@@ -1,0 +1,32 @@
+{
+  "name": "kurento-utils",
+  "description": "Kurento Utilities",
+  "license": "LGPL-2.1",
+  "keywords": [
+    "API",
+    "Kurento",
+    "WebRTC"
+  ],
+  "homepage": "http://www.kurento.org",
+  "repository": {
+    "type": "git",
+    "url": "Kurento/kurento-utils-js"
+  },
+  "authors": [
+    "Kurento <info@kurento.org> (http://kurento.org)",
+    "Ivan Gracia <izanmail@gmail.com>",
+    "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>"
+  ],
+  "main": [
+    "js/kurento-utils.js"
+  ],
+  "_release": "4ec922828b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4ec922828b6a59f87a569674977073828719284b"
+  },
+  "_source": "git://github.com/Kurento/kurento-utils-bower.git",
+  "_target": "master",
+  "_originalSource": "kurento-utils"
+}
