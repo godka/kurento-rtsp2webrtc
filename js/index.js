@@ -44,7 +44,7 @@ window.addEventListener('load', function(){
   console = new Console('console', console);
 	var videoOutput = document.getElementById('videoOutput');
 	var address = document.getElementById('address');
-	address.value = 'http://192.168.1.127:8080/test.mp4';
+	address.value = '10024';
   var pipeline;
   var webRtcPeer;
 
@@ -56,7 +56,7 @@ window.addEventListener('load', function(){
 
   function start() {
   	if(!address.value){
-  	  window.alert("You must set the video source URL first");
+  	  window.alert("You must set CameraID first!");
   	  return;
   	}
   	address.disabled = true;
@@ -89,8 +89,9 @@ window.addEventListener('load', function(){
   			if(error) return onError(error);
 
   			pipeline = p;
-
-  			pipeline.create("PlayerEndpoint", {uri: address.value}, function(error, player){
+        var realaddress = 'http://127.0.0.1:5834/CameraID' + address.value;
+        console.log("RealAddress is:" + realaddress);
+  			pipeline.create("PlayerEndpoint", {uri: realaddress}, function(error, player){
   			  if(error) return onError(error);
 
   			  pipeline.create("WebRtcEndpoint", function(error, webRtcEndpoint){
