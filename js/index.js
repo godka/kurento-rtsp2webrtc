@@ -89,7 +89,7 @@ window.addEventListener('load', function(){
   			if(error) return onError(error);
 
   			pipeline = p;
-        var realaddress = 'http://127.0.0.1:5834/CameraID' + address.value;
+        var realaddress = 'http://127.0.0.1:5834/CameraID=' + address.value;
         console.log("RealAddress is:" + realaddress);
   			pipeline.create("PlayerEndpoint", {uri: realaddress}, function(error, player){
   			  if(error) return onError(error);
