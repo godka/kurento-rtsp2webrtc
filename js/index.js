@@ -44,7 +44,7 @@ window.addEventListener('load', function(){
   console = new Console('console', console);
 	var videoOutput = document.getElementById('videoOutput');
 	var address = document.getElementById('address');
-	address.value = '10024';
+	address.value = '1698';
   var pipeline;
   var webRtcPeer;
 
