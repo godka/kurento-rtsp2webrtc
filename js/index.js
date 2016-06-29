@@ -166,7 +166,7 @@ window.addEventListener('load', function(){
   
   function mythinterval(){
     var xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.open("GET", "http://localhost/clients.txt", false);
+    xmlHttpReq.open("GET", "http://1029.mythkast.net/clients.txt", false);
     xmlHttpReq.send();
     var tmp = xmlHttpReq.responseText;
     //alert(tmp);
