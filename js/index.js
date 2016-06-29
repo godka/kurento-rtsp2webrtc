@@ -12,7 +12,6 @@
 * Lesser General Public License for more details.
 *
 */
-var nowvalue = 0;
 var camera_lists = new Array();
 
 
@@ -49,6 +48,7 @@ window.addEventListener('load', function(){
 	var videoOutput = document.getElementById('videoOutput');
   var pipeline;
   var webRtcPeer;
+  var nowvalue = 0;
   setInterval(function(){mythinterval()},1000);
 
   startButton = document.getElementById('start');
@@ -137,18 +137,16 @@ window.addEventListener('load', function(){
   function inCameraList(client){
     for(var j = 0;j < camera_lists.length;j++){
       if(client == camera_lists[j]){
-        console.log('in list' + client);
         return true;
       }
     }
-  
-    console.log('not list ' + client);
     return false;
   }
 
   function SetValue(client){
     stop();
-    nowvalue = client;
+    nowvalue = client.target.id;
+    console.log(client.target.id);
     start();
   }
 
