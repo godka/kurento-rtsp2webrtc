@@ -12,6 +12,9 @@
 * Lesser General Public License for more details.
 *
 */
+var nowvalue = 0;
+var camera_lists = new Array();
+
 
 function getopts(args, opts)
 {
@@ -22,6 +25,7 @@ function getopts(args, opts)
 
   return result;
 };
+
 
 var args = getopts(location.search,
 {
@@ -43,10 +47,9 @@ if (args.ice_servers) {
 window.addEventListener('load', function(){
   console = new Console('console', console);
 	var videoOutput = document.getElementById('videoOutput');
-	var address = document.getElementById('address');
-	address.value = '1698';
   var pipeline;
   var webRtcPeer;
+  setInterval(function(){mythinterval()},1000);
 
   startButton = document.getElementById('start');
   startButton.addEventListener('click', start);
@@ -55,11 +58,6 @@ window.addEventListener('load', function(){
   stopButton.addEventListener('click', stop);
 
   function start() {
-  	if(!address.value){
-  	  window.alert("You must set CameraID first!");
-  	  return;
-  	}
-  	address.disabled = true;
   	showSpinner(videoOutput);
     var options = {
       remoteVideo : videoOutput
@@ -89,7 +87,7 @@ window.addEventListener('load', function(){
   			if(error) return onError(error);
 
   			pipeline = p;
-        var realaddress = 'http://127.0.0.1:5834/CameraID=' + address.value;
+        var realaddress = 'http://127.0.0.1:5834/CameraID=' + nowvalue;
         console.log("RealAddress is:" + realaddress);
   			pipeline.create("PlayerEndpoint", {uri: realaddress}, function(error, player){
   			  if(error) return onError(error);
@@ -125,7 +123,6 @@ window.addEventListener('load', function(){
   }
 
   function stop() {
-    address.disabled = false;
     if (webRtcPeer) {
       webRtcPeer.dispose();
       webRtcPeer = null;
@@ -136,7 +133,56 @@ window.addEventListener('load', function(){
     }
     hideSpinner(videoOutput);
   }
+  
+  function inCameraList(client){
+    for(var j = 0;j < camera_lists.length;j++){
+      if(client == camera_lists[j]){
+        console.log('in list' + client);
+        return true;
+      }
+    }
+  
+    console.log('not list ' + client);
+    return false;
+  }
 
+  function SetValue(client){
+    stop();
+    nowvalue = client;
+    start();
+  }
+
+  function addNewList(client) {
+    console.log('Add New list' + client);
+    var td = document.getElementById("more");
+    var input = document.createElement('a');
+    input.setAttribute("class","list-group-item");
+    input.setAttribute("id", client);
+    input.setAttribute("href","#");
+    input.innerHTML = client;
+    input.addEventListener('click', SetValue);
+    td.appendChild(input);  
+  }
+  
+  function mythinterval(){
+    var xmlHttpReq = new XMLHttpRequest();
+    xmlHttpReq.open("GET", "http://localhost/clients.txt", false);
+    xmlHttpReq.send();
+    var tmp = xmlHttpReq.responseText;
+    //alert(tmp);
+    var array = tmp.split(':');
+    if(array.length > 1){
+      var clients = array[1].split(';');
+      for(var i = 0;i < clients.length ;i++){
+        if(clients[i] == '')
+          break;
+        if(inCameraList(clients[i]) == false){
+          camera_lists.push(clients[i]);
+          addNewList(clients[i]);
+        }
+     }
+    }
+  }
 });
 
 function setIceCandidateCallbacks(webRtcEndpoint, webRtcPeer, onError){

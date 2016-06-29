@@ -47,21 +47,25 @@
 			<h1>cyclops test page</h1>
 		</div>
 		<div class="row">
-			<div class="col-md-5">
-				<h3>stream Player</h3>
-				InputCameraID: <input style="width:350px;" id="address" type="text">
-				</br></br>
+			<div class="col-md-5" style="width:30%;">
+          		<h3>Active stream</h3>
+				<div id="more"></div>
+			</div>
+        	<div class="col-md-5">
+				</br>
+          		<!--<h3>Local stream</h3>-->
+          		<video id="videoOutput" autoplay width="800px" height="480px" poster="img/webrtc.png"></video>
+        	</div>
+
+			</div>
+							</br>
 				<a id="start" href="#" class="btn btn-success"><span
 					class="glyphicon glyphicon-play"></span> Start</a> 
 				<a id="stop" href="#" class="btn btn-danger"><span
 					class="glyphicon glyphicon-stop"></span> Stop</a>
 				</br></br>
-				<video id="videoOutput" autoplay width="800px" height="480px"
-					poster="./img/webrtc.png"></video>
-				</br>
-			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-*">
 					<label class="control-label" for="console">Console</label>
 					<div id="console"></div>
 				</div>
