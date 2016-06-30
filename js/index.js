@@ -50,13 +50,7 @@ window.addEventListener('load', function(){
   var webRtcPeer;
   var nowvalue = 0;
   setInterval(function(){mythinterval()},1000);
-
-  startButton = document.getElementById('start');
-  startButton.addEventListener('click', start);
-
-  stopButton = document.getElementById('stop');
-  stopButton.addEventListener('click', stop);
-
+  
   function start() {
   	showSpinner(videoOutput);
     var options = {
@@ -164,7 +158,7 @@ window.addEventListener('load', function(){
   
   function mythinterval(){
     var xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.open("GET", "http://1029.mythkast.net/clients.txt", false);
+    xmlHttpReq.open("GET", "http://" + location.hostname + "/clients.txt", false);
     xmlHttpReq.send();
     var tmp = xmlHttpReq.responseText;
     //alert(tmp);
