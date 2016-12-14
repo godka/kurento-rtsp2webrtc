@@ -30,20 +30,35 @@
 <script type="text/javascript">
 var player = null;
 
-window.addEventListener('load', function(){
-  console = new Console('console', console);
-});
-
 function loadStream(url) {
 	player.setMediaResourceURL(url);
 }
-
-
-
+window.addEventListener('load', function(){
+  console = new Console('console', console);
+  for(var i = 0;i < 5;i++){
+	  addNewList(i);
+  }
+});
 function getlink(url) {
-	return "/index.html?src=" + encodeURIComponent(url);
+	return "/record.html?src=" + encodeURIComponent(url);
 }
 
+function SetValue(client){
+    nowvalue = client.target.id;
+    console.log(client.target.id);
+}
+
+function addNewList(client) {
+    console.log('Add New list ' + client);
+    var td = document.getElementById("more");
+    var input = document.createElement('a');
+    input.setAttribute("class","list-group-item");
+    input.setAttribute("id", client);
+    input.setAttribute("href","#");
+    input.innerHTML = client;
+    input.addEventListener('click', SetValue);
+	td.appendChild(input);  
+}
 function jsbridge(playerId, event, data) {
   if (player == null) {
 	player = document.getElementById(playerId);
@@ -146,24 +161,27 @@ function jsbridge(playerId, event, data) {
 	</header>
 	<div class="container">
 		<div class="page-header">
-			<h1>直播画面</h1>
+			<h1>回放资源</h1>
 		</div>
-		
 		<div class="row">
-        	<div id="GrindPlayer">
-				<video src="http://1029.mythkast.net/live/stream.m3u8" controls="controls" autoplay = "autoplay">
-					not support!
-				</video>
-			</div>
-
-			</div>
-			<div class="row">
-				<div class="col-md-*">
-					<label class="control-label" for="console">Console</label>
-					<div id="console"></div>
+			<div class="col-md-5" style="width:30%;">
+          		<h3>record stream</h3>
+				<div id="more">
 				</div>
 			</div>
+        	<div id="GrindPlayer">
+				<video src="http://1029.mythkast.net/live/stream.m3u8" controls="controls" autoplay = "autoplay">
+					not support
+				</video>
+			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-*">
+				<label class="control-label" for="console">Console</label>
+				<div id="console"></div>
+			</div>
+		</div>
+	</div>
 
 	</div>
 </body>
